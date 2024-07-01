@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .my-class {
+        color: red;
+    }
+
+    .red {
+        color: blueviolet;
+    }
+</style>
+
+<body>
+    <div class="my-class">
+        ТЕКСТ
+    </div>
+    <script>
+
+        /* ""Изменение стиля элемента через заданное время""
+Напишите функцию changeStyleDelayed, которая принимает идентификатор элемента и время задержки (в миллисекундах) в качестве аргументов. 
+Функция должна изменить стиль элемента через указанное время.
+// Пример использования функции
+changeStyleDelayed('myElement', 2000); // Через 2 секунды изменяет стиль элемента с id 'myElement'"*/
+
+        function findElementByClass(rootElement, className) {
+            // Проверяем, соответствует ли текущий элемент искомому классу
+            if (rootElement.classList.contains(className)) {
+                return rootElement;
+            }
+            // Перебираем всех дочерних элементов
+            for (let i = 0; i < rootElement.children.length; i++) {
+                // Рекурсивно вызываем функцию для каждого дочернего элемента
+                let result = findElementByClass(rootElement.children[i], className);
+                // Если функция вернула не null, значит элемент найден
+                if (result !== null) {
+                    return result;
+                }
+            }
+            // Если элемент не найден, возвращаем null
+            return null;
+        }
+
+        let elementWithClass = findElementByClass(document.body, 'my-class');
+        function delayedStyle(elementWithClass, delay) {
+            setTimeout(() => { elementWithClass.classList.add('red'); }, delay);
+        }
+        if (elementWithClass) {
+            console.log('Элеиент найден:', elementWithClass);
+            delayedStyle(elementWithClass, 2000);
+        } else {
+            console.log('Искомый элемент не найден.');
+        }
+
+    </script>
+</body>
+
+</html>

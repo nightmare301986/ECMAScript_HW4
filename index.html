@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>Введите ID пользователя и подтвердите действие</p>
+    <p><input class="input_id" type="number" name="userName" placeholder="Введите Id записи" size="18" /></p>
+
+    <button class="btn_submit">Отправить</button>
+    <button type="reset">Отмена</button>
+
+    <script>
+        /* ""Получение данных о пользователе""
+         
+         Реализуйте функцию getUserData, которая принимает идентификатор пользователя (ID) в качестве аргумента и использует fetch для получения данных 
+         о пользователе с заданным ID с удаленного сервера. Функция должна возвращать промис, который разрешается с данными о пользователе в виде 
+         объекта. Если пользователь с указанным ID не найден, промис должен быть отклонен с соответствующим сообщением об ошибке.
+         
+         Подсказка, с последовательностью действий:
+         getUserData использует fetch для получения данных о пользователе с удаленного сервера. Если запрос успешен (с кодом 200), 
+         функция извлекает данные из ответа с помощью response.json() и возвращает объект с данными о пользователе. 
+         Если запрос неуспешен, функция отклоняет промис с сообщением об ошибке.
+         */
+
+        const btnSubmit = document.querySelector('.btn_submit');
+        const input_id = document.querySelector('.input_id');
+        const input_id2 = document.querySelector('.input_id').value;
+        const text = document.querySelector('.input_id');
+        text.addEventListener('change', function (e) {
+            console.log(e.target.value);
+            const id1 = e.target.value;
+            const url1 = `https://jsonplaceholder.typicode.com/users?id=${id1}`;
+            fetch(url1)
+                .then(response => response.json())
+                .then(result => console.log(result))
+                .catch(error => console.log('error', error));
+        });
+
+    </script>
+</body>
+
+</html>
